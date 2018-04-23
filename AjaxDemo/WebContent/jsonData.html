@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<script type="text/javascript">
+function load(){
+	var url="http://date.jsontest.com/";
+	var request;
+	
+	if(window.XMLHttpRequest){    
+	    request=new XMLHttpRequest();//for Chrome, mozilla etc  
+	   }    
+	   else if(window.ActiveXObject){    
+	    request=new ActiveXObject("Microsoft.XMLHTTP");//for IE only  
+	   }    
+	
+	try{
+		request.onreadystatechange=function(){
+		
+			if(request.readyState == 4){
+				var json = JSON.parse(request.responseText);
+				document.getElementById("date").innerHTML=json.date;
+				document.getElementById("time").innerHTML = json.time;  
+				}
+		}	
+		request.open("GET",url, true);
+		request.send();
+	}catch(e){
+		alert(e);
+	}
+	
+}
+</script>
+<title>Insert title here</title>
+</head>
+<body>
+ Date: <span id="date"></span><br/>  
+Time: <span id="time"></span><br/>  
+  
+<button type="button" onclick="load()">Load Information</button>  
+</body>
+</html>
